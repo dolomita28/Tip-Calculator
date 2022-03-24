@@ -1,12 +1,3 @@
-const billAmount = document.querySelector('[data-billAmount]');
-const tipxPerson = document.querySelector('[data-person]');
-const amountTotal = document.querySelector('[data-total]');
-const numPeople = document.querySelector('[data-people]');
-const btnPercentage = document.querySelectorAll('[data-number]');
-const btnCustom = document.querySelector('[custom]');
-
-
-
 class TipCalculator {
 
     constructor(amount, tipxPerson){
@@ -31,12 +22,13 @@ class TipCalculator {
 
     setPercentage(percentage){
         console.log('setpercentage', percentage)
-        this.percentage = percentage;
+        this.percentage = percentage / 100;
     }
 
     calculateBillXPerson(){
         console.log('calculate bill x person',this.billAmount, this.numPeople);
-        this.billxPerson = Math.round(parseFloat(this.billamount) / this.numPeople);
+        // this.billxPerson = Math.round(parseFloat(this.billAmount) / this.numPeople);
+        this.billxPerson = (parseFloat(this.billAmount) / this.numPeople).toFixed(2);
         console.log('bill x person', this.billxPerson)
     }
 
@@ -44,12 +36,12 @@ class TipCalculator {
         if (!this.percentage)
             return;
         console.log('calculate amount x person',this.billAmount, this.percentage);
-        this.tipxPerson = Math.round(+this.billamount * +this.percentage);
+        this.tipxPerson = (this.billAmount * this.percentage).toFixed(2);
     }
 
     calculateTotal(){
         console.log('calculate total',this.billxPerson, this.tipxPerson);
-        this.amountTotal = this.billxPerson + this.tipxPerson;
+        this.amountTotal = +this.billxPerson + +this.tipxPerson;
         
     }
 
@@ -57,10 +49,24 @@ class TipCalculator {
         this.calculateBillXPerson();
         this.calculateTipAmountPerson();
         this.calculateTotal();
+        this.display();
         console.log('tip per person',this.tipxPerson);
         console.log('total amount', this.amountTotal);
     }
+
+    display(){
+        amountTotal.textContent = this.amountTotal;
+        tipxPerson.textContent = this.tipxPerson;
+        console.log('display', amountTotal.textContent, tipxPerson.textContent)
+    }
 }
+const billAmount = document.querySelector('[data-billAmount]');
+const tipxPerson = document.querySelector('[data-person]');
+const amountTotal = document.querySelector('[data-total]');
+const numPeople = document.querySelector('[data-people]');
+const btnPercentage = document.querySelectorAll('[data-number]');
+const btnCustom = document.querySelector('[custom]');
+
 const tipCalculator = new TipCalculator(amountTotal,tipxPerson); 
 
 btnPercentage.forEach(btn => {
