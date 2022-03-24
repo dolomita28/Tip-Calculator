@@ -44,14 +44,16 @@ h1{
 }
 .calculator{
     background-color: var(--white);
-    width: 50vw;
-    display: flex;
-    justify-content: space-between;
+    /* width: 50vw; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* justify-content: space-between; */
     border-radius: 2rem;
     padding: 2rem;
+    grid-column-gap: 5rem;
 }
 .calculator-left{   
-    width:20vw; 
+    /* width:20vw;  */
     display: grid;
     align-content: center;
     grid-template-columns: repeat(3, 33.3%);
